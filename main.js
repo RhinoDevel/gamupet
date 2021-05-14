@@ -9,6 +9,26 @@
 
     var f = {}, v = {};
 
+    f.drawSample = function()
+    {
+        var ctx = v.canvas.getContext('2d'),
+            imgData = ctx.getImageData(0, 0, 320, 200), // Hard-coded!
+            i = 0;
+        
+        while(i < imgData.data.length)
+        {
+            imgData.data[i + 0] = 0;   // R value
+            imgData.data[i + 1] = 255; // G value
+            imgData.data[i + 2] = 0;   // B value
+            imgData.data[i + 3] = 255; // A value
+
+            i += 4;
+        }
+        
+        // Draw image data to the canvas
+        ctx.putImageData(imgData, 0, 0);
+    };
+
     f.onLoad = function()
     {
         v.ele = {};
@@ -36,6 +56,8 @@
         gamupet.room.init(v.ele.room);
 
         v.canvas = gamupet.room.getCanvas();
+
+        f.drawSample();
     };
 
     window.addEventListener('load', f.onLoad);
