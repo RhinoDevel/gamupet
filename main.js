@@ -51,13 +51,29 @@
 
         document.body.appendChild(v.ele.room);
 
-        gamupet.roomLateInit(gamupet.c.screen.width, gamupet.c.screen.height);
+        gamupet.roomLateInit(
+            gamupet.c.dim.screen.width, gamupet.c.dim.screen.height);
 
         gamupet.room.init(v.ele.room);
 
         v.canvas = gamupet.room.getCanvas();
 
-        f.drawSample();
+        gamupet.chardraw.init(
+            {
+                canvas: v.canvas,
+                dim: {
+                    char: gamupet.c.dim.char
+                },
+                pix: {
+                    on: gamupet.c.pix.on,
+                    off: gamupet.c.pix.off
+                }
+            });
+
+        gamupet.chardraw.at(0, 0, 1);
+        gamupet.chardraw.at(1, 1, 1);
+        gamupet.chardraw.at(38, 23, 1);
+        gamupet.chardraw.at(39, 24, 1);
     };
 
     window.addEventListener('load', f.onLoad);

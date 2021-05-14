@@ -8,7 +8,17 @@
 {
     'use strict';
 
-    gamupet.c = {};
+    var c = {};
 
-    gamupet.c.screen = { width: 320, height: 200 };
+    c.dim = {};
+
+    c.dim.screen = { width: 320, height: 200 }; // Commodore screen dimensions.
+
+    c.dim.char = { width: 8, height: 8 }; // Commodore character dimensions.
+
+    c.pix = {};
+    c.pix.on = { r: 0, g: 255, b: 0, a: 255 }; // Pixel values for ON.
+    c.pix.off = { r: 100, g: 100, b: 100, a: 255 }; // Pixel values for OFF.
+
+    gamupet.c = c;
 }());
