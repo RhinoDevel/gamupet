@@ -33,7 +33,7 @@
     {
         var i = c * v.dim.char.height;
 
-        return v.chars.slice(i, i + v.dim.char.height - 1);
+        return v.chars.slice(i, i + v.dim.char.height);
     };
 
     /** Converts given coordinates of a character into pixel (start) position.
