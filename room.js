@@ -50,7 +50,8 @@
      */
     f.init = function(ele)
     {
-        v.bg = gamupet.ele.createCanvas(0, 0, c.dim.bg.w, c.dim.bg.h);
+        v.bg = gamupet.ele.createCanvas(
+            0, 0, c.dim.bg.w, c.dim.bg.h, c.dim.bgAbs.w, c.dim.bgAbs.h);
         ele.appendChild(v.bg);
 
         ele.style.width = String(c.dim.bg.w) + 'px';

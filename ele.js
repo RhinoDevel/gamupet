@@ -11,7 +11,7 @@
 
     gamupet.ele = {};
 
-    gamupet.ele.createCanvas = function(t, l, w, h)
+    gamupet.ele.createCanvas = function(t, l, w, h, cW, cH)
     {
         var retVal = document.createElement('canvas');
 
@@ -33,6 +33,15 @@
         if(typeof h === 'number')
         {
             retVal.style.height = String(h) + 'px';
+        }
+
+        if(typeof cW === 'number')
+        {
+            retVal.width = cW;
+        }
+        if(typeof cH === 'number')
+        {
+            retVal.height = cH;
         }
 
         return retVal;
