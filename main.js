@@ -11,22 +11,22 @@
 
     f.drawSample = function()
     {
-        var ctx = v.canvas.getContext('2d'),
-            imgData = ctx.getImageData(0, 0, 320, 200), // Hard-coded!
-            i = 0;
-        
-        while(i < imgData.data.length)
-        {
-            imgData.data[i + 0] = 0;   // R value
-            imgData.data[i + 1] = 255; // G value
-            imgData.data[i + 2] = 0;   // B value
-            imgData.data[i + 3] = 255; // A value
+        var charCount = 256, // Hard-coded
+            charHeight = 
+                gamupet.c.dim.screen.height / gamupet.c.dim.char.height,
+            charWidth = 
+                gamupet.c.dim.screen.width / gamupet.c.dim.char.width,
+            c = 0, row = 0, col = 0;
 
-            i += 4;
+        for(row = 0; row < charHeight && c < charCount; ++row)
+        {
+            for(col = 0;col < charWidth && c < charCount; ++col)
+            {
+                gamupet.chardraw.at(col, row, c);
+
+                ++c;
+            }
         }
-        
-        // Draw image data to the canvas
-        ctx.putImageData(imgData, 0, 0);
     };
 
     f.onLoad = function()
@@ -67,13 +67,11 @@
                 pix: {
                     on: gamupet.c.pix.on,
                     off: gamupet.c.pix.off
-                }
+                },
+                chars: gamupet.c.chars
             });
 
-        gamupet.chardraw.at(0, 0, 1);
-        gamupet.chardraw.at(1, 1, 1);
-        gamupet.chardraw.at(38, 23, 1);
-        gamupet.chardraw.at(39, 24, 1);
+        f.drawSample();
     };
 
     window.addEventListener('load', f.onLoad);

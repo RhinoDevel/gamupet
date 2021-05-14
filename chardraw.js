@@ -22,6 +22,8 @@
         v.pix.on = p.pix.on;
         v.pix.off = p.pix.off;
 
+        v.chars = p.chars;
+
         v.context = v.canvas.getContext('2d');
     };
 
@@ -29,7 +31,9 @@
      */
     f.getPixels = function(c)
     {
-        return [ 1, 2, 4, 8, 16, 32, 64, 128 ]; // TODO: Implement correctly!
+        var i = c * v.dim.char.height;
+
+        return v.chars.slice(i, i + v.dim.char.height - 1);
     };
 
     /** Converts given coordinates of a character into pixel (start) position.
