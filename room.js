@@ -2,8 +2,9 @@
 // (c) Marcel Timm, RhinoDevel, 2021
 
 /** To be run during page load to augment global gamupet object with new
- *  property called roomLateInit, which is a function to be run AFTER page load
- *  (to get correct body dimensions).
+ *  properties called roomLateInit and room.
+ *  roomLateInit() is a function to be run AFTER page load (to get correct body
+ *  dimensions), room.init() must be run after that.
  */
 (function() // IIFE
 {
@@ -12,7 +13,6 @@
     var f = {}, c = {}, v = {};
 
     c.dim = {};
-    c.dim.bgAbs = { w: 320, h: 200 }; // Commodore screen dimensions.
 
     /**
      *  - To be called during initialization. 
@@ -62,8 +62,10 @@
      *  property called room, which is an object holding functions to create
      *  and handle a dressing room.
      */
-    gamupet.roomLateInit = function()
+    gamupet.roomLateInit = function(width, height)
     {
+        c.dim.bgAbs = { w: width, h: height };
+
         c.pixelFactor = f.getPixelFactor();
         
         c.dim.bg = { 

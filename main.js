@@ -51,7 +51,7 @@
 
         document.body.appendChild(v.ele.room);
 
-        gamupet.roomLateInit();
+        gamupet.roomLateInit(gamupet.c.screen.width, gamupet.c.screen.height);
 
         gamupet.room.init(v.ele.room);
 
