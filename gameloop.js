@@ -8,7 +8,7 @@
 {
     'use strict';
 
-    var f = {}, c = {}, o = {};
+    var f = {}, c = {}, v = {}, o = {};
 
     f.getRand = function(min, max)
     {
@@ -33,6 +33,13 @@
 
     f.loop = function(timestamp)
     {
+        console.log(
+            'FPS: '
+                + String(
+                    Math.round(
+                        1.0 / ((timestamp - v.last_timestamp) / 1000.0))));
+        v.last_timestamp = timestamp;
+
         f.drawAt(
             f.getRand(0, c.dim.width - 1),
             f.getRand(0, c.dim.height - 1),
@@ -47,6 +54,8 @@
         c.charCount = p.charCount;
 
         f.drawAt = p.drawAt;
+
+        v.last_timestamp = 0;
     };
 
     f.start = function()
