@@ -18,10 +18,8 @@
 
     c.pix = {};
     c.pix.on = { r: 0, g: 255, b: 0, a: 255 }; // Pixel values for ON.
-    c.pix.off = { r: 0, g: 0, b: 0, a: 255 }; // Pixel values for OFF.
+    c.pix.off = { r: 0, g: 0, b: 0, a: 255 }; // Pixel values for OFF. 
 
-    // 2048 byte / 8 pixel rows (holding 8 pixel columns each) = 256 characters:
-    //
     c.chars = [ // TODO: Replace this random data with actual character set!
         0xbe, 0x49, 0x92, 0x86, 0x73, 0x5a, 0x38, 0xd9, 0xdd, 0x2c, 0x8b, 0x33,
         0xc6, 0x87, 0x94, 0xe1, 0xed, 0xcb, 0xf0, 0xe8, 0x22, 0x26, 0x93, 0xc4,
@@ -195,6 +193,12 @@
         0xb9, 0x19, 0xda, 0x60, 0x78, 0xe6, 0x37, 0x7d, 0x57, 0xdc, 0xee, 0xbb,
         0x31, 0x59, 0x9d, 0x82, 0xe0, 0x15, 0xa9, 0x99
     ];
+    //
+    // Each array entry holds 8 bit, each bit is a character's pixel:
+    //
+    c.charCount = 8 * c.chars.length; // Count of bits of all characters.
+    c.charCount = c.charCount / c.dim.char.width; // Count of rows of all chars.
+    c.charCount = c.charCount / c.dim.char.height;  // Count of characters.
 
     gamupet.c = c;
 }());

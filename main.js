@@ -9,26 +9,6 @@
 
     var f = {}, v = {};
 
-    f.drawSample = function()
-    {
-        var charCount = 256, // Hard-coded
-            charHeight = 
-                gamupet.c.dim.screen.height / gamupet.c.dim.char.height,
-            charWidth = 
-                gamupet.c.dim.screen.width / gamupet.c.dim.char.width,
-            c = 0, row = 0, col = 0;
-
-        for(row = 0; row < charHeight && c < charCount; ++row)
-        {
-            for(col = 0;col < charWidth && c < charCount; ++col)
-            {
-                gamupet.chardraw.at(col, row, c);
-
-                ++c;
-            }
-        }
-    };
-
     f.onLoad = function()
     {
         v.ele = {};
@@ -71,7 +51,19 @@
                 chars: gamupet.c.chars
             });
 
-        f.drawSample();
+        gamupet.gameloop.init(
+            {
+                dim: {
+                    width: gamupet.c.dim.screen.width
+                            / gamupet.c.dim.char.width,
+                    height: gamupet.c.dim.screen.height
+                            / gamupet.c.dim.char.height
+                },
+                charCount: gamupet.c.charCount,
+                drawAt: gamupet.chardraw.at
+            });
+
+        gamupet.gameloop.start();
     };
 
     window.addEventListener('load', f.onLoad);
