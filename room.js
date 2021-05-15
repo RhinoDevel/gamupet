@@ -30,11 +30,6 @@
         return dev.w / c.dim.bgAbs.w;
     };
 
-    // f.getRand = function(min, max)
-    // {
-    //     return Math.floor(Math.random() * (max - min + 1)) + min;
-    // };
-
     f.pixelFactor = function(num)
     {
         return Math.trunc(c.pixelFactor * num);

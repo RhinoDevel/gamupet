@@ -8,34 +8,50 @@
 {
     'use strict';
 
-    var f = {}, v = {}, o = {};
+    var f = {}, c = {}, o = {};
 
-    f.drawSample = function()
+    f.getRand = function(min, max)
     {
-        var c = 0, row = 0, col = 0;
-    
-        for(row = 0; row < v.dim.height && c < v.charCount; ++row)
-        {
-            for(col = 0;col < v.dim.width && c < v.charCount; ++col)
-            {
-                f.drawAt(col, row, c);
-    
-                ++c;
-            }
-        }
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+
+    // f.drawSample = function()
+    // {
+    //     var ch = 0, row = 0, col = 0;
+    //
+    //     for(row = 0; row < c.dim.height; ++row)
+    //     {
+    //         for(col = 0;col < c.dim.width; ++col)
+    //         {
+    //             f.drawAt(col, row, ch);
+    //
+    //             ++ch;
+    //             ch = ch % c.charCount; 
+    //         }
+    //     }
+    // };
+
+    f.loop = function(timestamp)
+    {
+        f.drawAt(
+            f.getRand(0, c.dim.width - 1),
+            f.getRand(0, c.dim.height - 1),
+            f.getRand(0, c.charCount - 1));
+
+        window.requestAnimationFrame(f.loop);
     };
 
     f.init = function(p)
     {
-        v.dim = p.dim;
-        v.charCount = p.charCount;
+        c.dim = p.dim;
+        c.charCount = p.charCount;
 
         f.drawAt = p.drawAt;
     };
 
     f.start = function()
     {
-        f.drawSample();
+        window.requestAnimationFrame(f.loop);
     };
 
     o.init = f.init;
