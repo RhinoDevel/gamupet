@@ -31,10 +31,13 @@
 
         document.body.appendChild(v.ele.room);
 
-        gamupet.roomLateInit(
-            gamupet.c.dim.screen.width, gamupet.c.dim.screen.height);
-
-        gamupet.room.init(v.ele.room);
+        gamupet.room.init(
+            {
+                width: gamupet.c.dim.screen.width,
+                height: gamupet.c.dim.screen.height,
+                createCanvas: gamupet.ele.createCanvas,
+                ele: v.ele.room
+            });
 
         v.canvas = gamupet.room.getCanvas();
 
