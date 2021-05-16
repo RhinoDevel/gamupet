@@ -9,9 +9,9 @@
 {
     'use strict';
 
-    gamupet.ele = {};
+    var f = {}, o = {};
 
-    gamupet.ele.createCanvas = function(t, l, w, h, cW, cH)
+    f.createCanvas = function(t, l, w, h, cW, cH)
     {
         var retVal = document.createElement('canvas');
 
@@ -47,11 +47,7 @@
         return retVal;
     };
 
-    // gamupet.ele.removeChildren = function(ele)
-    // {
-    //     while(ele.firstChild!==null)
-    //     {
-    //         ele.removeChild(ele.firstChild);
-    //     }
-    // };
+    o.createCanvas = f.createCanvas;
+
+    gamupet.ele = o;
 }());
