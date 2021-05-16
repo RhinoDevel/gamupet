@@ -33,6 +33,8 @@
 
     f.loop = function(timestamp)
     {
+        // This is normally at 60 FPS/Hz:
+        //
         console.log(
             'FPS: '
                 + String(
