@@ -8,19 +8,19 @@
 {
     'use strict';
 
-    var c = {};
+    var o = {};
 
-    c.dim = {};
+    o.dim = {};
 
-    c.dim.screen = { width: 320, height: 200 }; // Commodore screen dimensions.
+    o.dim.screen = { width: 320, height: 200 }; // Commodore screen dimensions.
 
-    c.dim.char = { width: 8, height: 8 }; // Commodore character dimensions.
+    o.dim.char = { width: 8, height: 8 }; // Commodore character dimensions.
 
-    c.pix = {};
-    c.pix.on = { r: 0, g: 255, b: 0, a: 255 }; // Pixel values for ON.
-    c.pix.off = { r: 0, g: 0, b: 0, a: 255 }; // Pixel values for OFF. 
+    o.pix = {};
+    o.pix.on = { r: 0, g: 255, b: 0, a: 255 }; // Pixel values for ON.
+    o.pix.off = { r: 0, g: 0, b: 0, a: 255 }; // Pixel values for OFF. 
 
-    c.chars = [ // TODO: Replace this random data with actual character set!
+    o.chars = [ // TODO: Replace this random data with actual character set!
         0xbe, 0x49, 0x92, 0x86, 0x73, 0x5a, 0x38, 0xd9, 0xdd, 0x2c, 0x8b, 0x33,
         0xc6, 0x87, 0x94, 0xe1, 0xed, 0xcb, 0xf0, 0xe8, 0x22, 0x26, 0x93, 0xc4,
         0xc3, 0x3e, 0xf6, 0xd5, 0xf6, 0x21, 0xfa, 0xea, 0xc6, 0x9e, 0xe8, 0xd1,
@@ -196,9 +196,9 @@
     //
     // Each array entry holds 8 bit, each bit is a character's pixel:
     //
-    c.charCount = 8 * c.chars.length; // Count of bits of all characters.
-    c.charCount = c.charCount / c.dim.char.width; // Count of rows of all chars.
-    c.charCount = c.charCount / c.dim.char.height;  // Count of characters.
+    o.charCount = 8 * o.chars.length; // Count of bits of all characters.
+    o.charCount = o.charCount / o.dim.char.width; // Count of rows of all chars.
+    o.charCount = o.charCount / o.dim.char.height;  // Count of characters.
 
-    gamupet.c = c;
+    gamupet.c = o;
 }());
