@@ -23,7 +23,7 @@
         document.body.style.padding = '0px';
         document.body.style.margin = '0px';
 
-        document.body.style['background-color'] = 'black';
+        document.body.style['background-color'] = 'lightgray';
 
         document.body.style.display = 'flex';
         document.body.style['justify-content'] = 'center';
@@ -43,6 +43,13 @@
                 createCanvas: gamupet.ele.createCanvas,
                 ele: ele
             });
+
+        canvas.style['background-color'] = 'rgba('
+                + String(gamupet.c.pix.off.r)
+                + ',' + String(gamupet.c.pix.off.g)
+                + ',' + String(gamupet.c.pix.off.b)
+                + ',' + String(gamupet.c.pix.off.a)
+            + ')';
 
         gamupet.chardraw.init(
             {
