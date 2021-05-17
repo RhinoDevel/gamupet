@@ -12,33 +12,52 @@
     f.onLoad = function()
     {
         var ele = document.createElement('div'),
-            canvas = null;
+            canvas = null,
+            container = null,
+            outerDim = {};
+
+        if(gamupet.c.fullscreen)
+        {
+            container = document.body;
+
+            container.style.width = '100%';
+            container.style.height = '100%';
+            container.style.border = '0px none';
+            container.style.padding = '0px';
+            container.style.margin = '0px';
+
+            outerDim.width = document.body.clientWidth;
+            outerDim.height = document.body.clientHeight;
+        }
+        else
+        {
+            container = document.createElement('div');
+
+            outerDim.width = 640;
+            outerDim.height = 480;
+
+            container.style.width = String(outerDim.width) + 'px';
+            container.style.height =  String(outerDim.height) + 'px';
+
+            document.body.appendChild(container);
+        }
 
         ele.style.order = String(1);
         ele.style.position = 'relative';
 
-        document.body.style.width = '100%';
-        document.body.style.height = '100%';
-        document.body.style.border = '0px none';
-        document.body.style.padding = '0px';
-        document.body.style.margin = '0px';
+        container.style['background-color'] = 'lightgray';
 
-        document.body.style['background-color'] = 'lightgray';
+        container.style.display = 'flex';
+        container.style['justify-content'] = 'center';
+        container.style['align-items'] = 'center';
 
-        document.body.style.display = 'flex';
-        document.body.style['justify-content'] = 'center';
-        document.body.style['align-items'] = 'center';
-
-        document.body.appendChild(ele);
+        container.appendChild(ele);
 
         canvas = gamupet.room.init(
             {
                 dim: {
                     inner: gamupet.c.dim.screen,
-                    outer: {
-                        width: document.body.clientWidth,
-                        height: document.body.clientHeight
-                    }
+                    outer: outerDim
                 },
                 createCanvas: gamupet.ele.createCanvas,
                 ele: ele

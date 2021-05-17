@@ -10,6 +10,8 @@
 
     var o = {};
 
+    o.fullscreen = true;
+
     o.dim = {};
 
     o.dim.screen = { width: 320, height: 200 }; // Commodore screen dimensions.
