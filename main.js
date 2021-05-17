@@ -7,15 +7,15 @@
 {
     'use strict';
 
-    var f = {}, v = {};
+    var f = {};
 
     f.onLoad = function()
     {
-        v.ele = {};
+        var ele = document.createElement('div'),
+            canvas = null;
 
-        v.ele.room = document.createElement('div');
-        v.ele.room.style.order = String(1);
-        v.ele.room.style.position = 'relative';
+        ele.style.order = String(1);
+        ele.style.position = 'relative';
 
         document.body.style.width = '100%';
         document.body.style.height = '100%';
@@ -29,21 +29,24 @@
         document.body.style['justify-content'] = 'center';
         document.body.style['align-items'] = 'center';
 
-        document.body.appendChild(v.ele.room);
+        document.body.appendChild(ele);
 
-        gamupet.room.init(
+        canvas = gamupet.room.init(
             {
-                width: gamupet.c.dim.screen.width,
-                height: gamupet.c.dim.screen.height,
+                dim: {
+                    inner: gamupet.c.dim.screen,
+                    outer: {
+                        width: document.body.clientWidth,
+                        height: document.body.clientHeight
+                    }
+                },
                 createCanvas: gamupet.ele.createCanvas,
-                ele: v.ele.room
+                ele: ele
             });
-
-        v.canvas = gamupet.room.getCanvas();
 
         gamupet.chardraw.init(
             {
-                canvas: v.canvas,
+                canvas: canvas,
                 dim: {
                     char: gamupet.c.dim.char
                 },

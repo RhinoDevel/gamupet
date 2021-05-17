@@ -10,24 +10,18 @@
 {
     'use strict';
 
-    var f = {}, c = {}, v = {}, o = {};
-
-    c.dim = {};
+    var f = {}, c = {}, o = {};
 
     /**
      *  - To be called during initialization. 
      */
-    f.getPixelFactor = function()
+    f.getPixelFactor = function(dimInner, dimOuter)
     {
-        var dev = {
-                w: document.body.clientWidth, h: document.body.clientHeight
-        };
-
-        if(dev.w / dev.h > c.dim.bgAbs.w / c.dim.bgAbs.h)
+        if(dimOuter.width / dimOuter.height > dimInner.width / dimInner.height)
         {
-            return dev.h / c.dim.bgAbs.h;
+            return dimOuter.height / dimInner.height;
         }
-        return dev.w / c.dim.bgAbs.w;
+        return dimOuter.width / dimInner.width;
     };
 
     f.pixelFactor = function(num)
@@ -35,34 +29,34 @@
         return Math.trunc(c.pixelFactor * num);
     };
 
-    f.getCanvas = function()
-    {
-        return v.bg;
-    };
-
     /**
      * - Alters given element's dimensions.
+     * - Returns canvas element.
      */
     f.init = function(p)
     {
-        c.dim.bgAbs = { w: p.width, h: p.height };
+        var retVal = null, eleDim = null;
 
-        c.pixelFactor = f.getPixelFactor();
+        c.pixelFactor = f.getPixelFactor(p.dim.inner, p.dim.outer);
         
-        c.dim.bg = { 
-            w: f.pixelFactor(c.dim.bgAbs.w), h: f.pixelFactor(c.dim.bgAbs.h)
+        eleDim = { 
+            width: f.pixelFactor(p.dim.inner.width),
+            height: f.pixelFactor(p.dim.inner.height)
         };
         
-        v.bg = p.createCanvas(
-            0, 0, c.dim.bg.w, c.dim.bg.h, c.dim.bgAbs.w, c.dim.bgAbs.h);
-        p.ele.appendChild(v.bg);
+        retVal = p.createCanvas(
+            0, 0, 
+            eleDim.width, eleDim.height, 
+            p.dim.inner.width, p.dim.inner.height);
+        p.ele.appendChild(retVal);
 
-        p.ele.style.width = String(c.dim.bg.w) + 'px';
-        p.ele.style.height = String(c.dim.bg.h) + 'px';
+        p.ele.style.width = String(eleDim.width) + 'px';
+        p.ele.style.height = String(eleDim.height) + 'px';
+
+        return retVal;
     };
 
     o.init = f.init;
-    o.getCanvas = f.getCanvas;
 
     gamupet.room = o;
 }());
