@@ -43,10 +43,9 @@
         return { x: v.dim.char.width * charX, y: v.dim.char.height * charY };  
     };
 
-    f.at = function(charX, charY, c)
+    f.pixelsAt = function(charX, charY, pixels)
     {
         var pos = f.getCharPos(charX, charY),
-            pixels = f.getPixels(c),
             imgData = v.context.getImageData(
                 pos.x, pos.y, v.dim.char.width, v.dim.char.height),
             row = 0,
@@ -79,8 +78,39 @@
         v.context.putImageData(imgData, pos.x, pos.y);
     };
 
+    f.at = function(charX, charY, c)
+    {
+        f.pixelsAt(charX, charY, f.getPixels(c));
+    };
+
+    /**
+     * - "Graphics" mode (POKE 59468, 12).
+     * - "Lower-case" mode (POKE 59468, 14).
+     */
+    f.petAt = function(charX, charY, graphicsMode, screenCode)
+    {
+        var invert = (screenCode & 128) !== 0,
+            modeOffset = graphicsMode ? 0: 128,
+            c = (screenCode % 128) + modeOffset,
+            pixels = f.getPixels(c),
+            i = 0;
+
+        // TODO: This is not performance optimized:
+        //
+        if(invert)
+        {
+            for(i = 0; i < pixels.length; ++i)
+            {
+                pixels[i] = 255 & ~pixels[i];
+            }
+        }
+
+        f.pixelsAt(charX, charY, pixels);
+    };
+
     o.init = f.init;
     o.at = f.at;
+    o.petAt = f.petAt;
 
     gamupet.chardraw = o;
 }());
