@@ -92,7 +92,7 @@
                             / gamupet.c.dim.char.height
                 },
                 charCount: gamupet.c.charCount,
-                drawAt: gamupet.chardraw.at
+                drawPetAt: gamupet.chardraw.petAt
             });
 
         gamupet.gameloop.start();
