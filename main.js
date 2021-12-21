@@ -83,7 +83,7 @@
                 chars: gamupet.c.chars
             });
 
-        gamupet.gameloop.init(
+        gamupet.demo.init(
             {
                 dim: {
                     width: gamupet.c.dim.screen.width
@@ -93,6 +93,11 @@
                 },
                 charCount: gamupet.c.charCount,
                 drawPetAt: gamupet.chardraw.petAt
+            });
+
+        gamupet.gameloop.init(
+            {
+                onLoop: gamupet.demo.onLoop
             });
 
         gamupet.gameloop.start();
