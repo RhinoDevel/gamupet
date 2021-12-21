@@ -39,15 +39,39 @@
             f.getRand(0, c.charCount - 1));
         //
         //f.drawAllPetChars();
+
+        if(v.keyboard.isPressed(c.key))
+        {
+            if(!v.isPlaying)
+            {
+                v.freqplay.on(c.freq);
+                v.isPlaying = true;
+            }
+        }
+        else
+        {
+            if(v.isPlaying)
+            {
+                v.freqplay.off();
+                v.isPlaying = false;
+            }
+        }
     };
 
     f.init = function(p)
     {
+        c.key = 'a';
+        c.freq = 440; // Hz
         c.dim = p.dim;
         c.charCount = p.charCount;
 
         f.drawPetAt = p.drawPetAt;
         f.getRand = p.getRand;
+
+        v.freqplay = p.freqplay;
+        v.keyboard = p.keyboard;
+
+        v.playing = false;
     };
 
     o.init = f.init;

@@ -103,6 +103,13 @@
                 chars: gamupet.c.chars
             });
 
+        gamupet.freqplay.init();
+
+        gamupet.keyboard.init(
+            {
+                whitelist: null
+            });
+
         gamupet.demo.init(
             {
                 dim: {
@@ -114,7 +121,9 @@
                 charCount: gamupet.c.charCount,
 
                 drawPetAt: gamupet.chardraw.petAt,
-                getRand: gamupet.math.getRand
+                getRand: gamupet.math.getRand,
+                freqplay: gamupet.freqplay,
+                keyboard: gamupet.keyboard
             });
 
         gamupet.gameloop.init(
