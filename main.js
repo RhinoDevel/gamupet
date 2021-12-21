@@ -18,14 +18,26 @@
         document.body.style.margin = '0px';
     };
 
+    f.createContainer = function(width, height)
+    {
+        var retVal = document.createElement('div');
+
+        retVal.style.width = String(width) + 'px';
+        retVal.style.height = String(height) + 'px';
+        retVal.style['background-color'] = 'lightgray';
+        retVal.style.display = 'flex';
+        retVal.style['justify-content'] = 'center';
+        retVal.style['align-items'] = 'center';
+
+        return retVal;
+    };
+
     f.onLoad = function()
     {
         var ele = document.createElement('div'),
             canvas = null,
-            container = document.createElement('div'),
+            container = null,
             outerDim = {};
-
-        document.body.appendChild(container);
 
         if(gamupet.c.fullscreen)
         {
@@ -40,19 +52,13 @@
             outerDim.height = 480;            
         }
 
-        container.style.width = String(outerDim.width) + 'px';
-        container.style.height = String(outerDim.height) + 'px';
-
+        container = f.createContainer(outerDim.width, outerDim.height);
+        
         ele.style.order = String(1);
         ele.style.position = 'relative';
 
-        container.style['background-color'] = 'lightgray';
-
-        container.style.display = 'flex';
-        container.style['justify-content'] = 'center';
-        container.style['align-items'] = 'center';
-
         container.appendChild(ele);
+        document.body.appendChild(container);
 
         canvas = gamupet.room.init(
             {
