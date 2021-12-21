@@ -42,10 +42,12 @@
         return retVal;
     };
 
-    f.onLoad = function()
+    /**
+     * - Returns canvas.
+     */
+    f.initEles = function()
     {
         var ele = f.createEle(),
-            canvas = null,
             container = null,
             outerDim = {};
 
@@ -67,7 +69,7 @@
         container.appendChild(ele);
         document.body.appendChild(container);
 
-        canvas = gamupet.room.init(
+        return gamupet.room.init(
             {
                 dim: {
                     inner: gamupet.c.dim.screen,
@@ -82,6 +84,11 @@
                         + ',' + String(gamupet.c.pix.off.a)
                     + ')'
             });
+    };
+
+    f.onLoad = function()
+    {
+        var canvas = f.initEles();
 
         gamupet.chardraw.init(
             {
