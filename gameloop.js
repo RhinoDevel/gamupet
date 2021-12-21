@@ -13,11 +13,6 @@
      v.last_timestamp = 0;
      v.onLoop = null;
  
-     f.getRand = function(min, max)
-     {
-         return Math.floor(Math.random() * (max - min + 1)) + min;
-     };
- 
      f.loop = function(timestamp)
      {
          // TODO: Add init. parameter to set to 50Hz or 60Hz mode, see:
