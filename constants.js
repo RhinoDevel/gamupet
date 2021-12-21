@@ -10,6 +10,8 @@
 
     var o = {};
 
+    o.freq = 60.0; // Hz
+
     o.fullscreen = true;
 
     o.dim = {};

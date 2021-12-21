@@ -99,6 +99,7 @@
 
         gamupet.gameloop.init(
             {
+                freq: gamupet.c.freq,
                 onLoop: gamupet.demo.onLoop
             });
 

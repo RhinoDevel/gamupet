@@ -10,21 +10,33 @@
  
      var f = {}, c = {}, v = {}, o = {};
  
-     v.last_timestamp = 0;
+     c.freq = 60.0; // Hz (default value). Refresh rate (usually 50Hz or 60Hz).
+
+     v.last_timestamp = 0.0;
+     v.time = -1.0; // ms
      v.onLoop = null;
  
      f.loop = function(timestamp)
      {
-         // TODO: Add init. parameter to set to 50Hz or 60Hz mode, see:
-         //       https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
- 
-         // This is normally at 60 FPS/Hz (really?!):
+         var elapsed = timestamp - v.last_timestamp; // ms
+
+         if(elapsed < v.time)
+         {
+            window.requestAnimationFrame(f.loop);
+            return;
+         }
+         
+         // Getting exactly 50Hz, 60Hz or other wanted values is not always
+         // possible, depends on elapsed time between two calls of the loop
+         // function which itself depends on hardware and OS:
          //
          console.log(
-            'FPS: '
+            'Elapsed: ' + String(elapsed)
+            + ' '
+            + 'FPS: '
                 + String(
                     Math.round(
-                        1.0 / ((timestamp - v.last_timestamp) / 1000.0))));
+                        1.0 / (elapsed / 1000.0))));
          
          v.last_timestamp = timestamp;
  
@@ -35,7 +47,16 @@
  
      f.init = function(p)
      {
+         var freq = c.freq;
+
          v.onLoop = p.onLoop;
+
+         if(typeof p.freq === 'number')
+         {
+             freq = p.freq;
+         }
+         v.time = 1.0 / freq; // s (because frequency is in Hz).
+         v.time = 1000.0 * v.time; // ms
      };
  
      f.start = function()
