@@ -10,11 +10,6 @@
 
     var f = {}, c = {}, v = {}, o = {};
 
-    f.getRand = function(min, max)
-    {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
-
     f.drawAllPetCharsWithModeAt = function(startRow, graphicsMode)
     {
         var ch = 0, row = 0, col = 0;
@@ -47,10 +42,10 @@
         v.last_timestamp = timestamp;
 
         f.drawPetAt(
-            f.getRand(0, c.dim.width - 1),
-            f.getRand(0, c.dim.height - 1),
+            gamupet.math.getRand(0, c.dim.width - 1),
+            gamupet.math.getRand(0, c.dim.height - 1),
             true, // Graphics mode ON.
-            f.getRand(0, c.charCount - 1));
+            gamupet.math.getRand(0, c.charCount - 1));
         //
         //f.drawAllPetChars();
 
