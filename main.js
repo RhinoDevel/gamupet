@@ -34,7 +34,7 @@
 
     f.onLoad = function()
     {
-        var ele = document.createElement('div'),
+        var ele = null,
             canvas = null,
             container = null,
             outerDim = {};
@@ -48,12 +48,13 @@
         }
         else
         {
-            outerDim.width = 640;
-            outerDim.height = 480;            
+            outerDim.width = 640;  // These are
+            outerDim.height = 480; // sample values.
         }
 
         container = f.createContainer(outerDim.width, outerDim.height);
         
+        ele = document.createElement('div');
         ele.style.order = String(1);
         ele.style.position = 'relative';
 
@@ -67,15 +68,14 @@
                     outer: outerDim
                 },
                 createCanvas: gamupet.ele.createCanvas,
-                ele: ele
+                ele: ele,
+                backgroundColor: 'rgba('
+                        + String(gamupet.c.pix.off.r)
+                        + ',' + String(gamupet.c.pix.off.g)
+                        + ',' + String(gamupet.c.pix.off.b)
+                        + ',' + String(gamupet.c.pix.off.a)
+                    + ')'
             });
-
-        canvas.style['background-color'] = 'rgba('
-                + String(gamupet.c.pix.off.r)
-                + ',' + String(gamupet.c.pix.off.g)
-                + ',' + String(gamupet.c.pix.off.b)
-                + ',' + String(gamupet.c.pix.off.a)
-            + ')';
 
         gamupet.chardraw.init(
             {

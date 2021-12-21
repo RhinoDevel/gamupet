@@ -10,11 +10,8 @@
 {
     'use strict';
 
-    var f = {}, c = {}, o = {};
+    var f = {}, o = {};
 
-    /**
-     *  - To be called during initialization. 
-     */
     f.getPixelFactor = function(dimInner, dimOuter)
     {
         if(dimOuter.width / dimOuter.height > dimInner.width / dimInner.height)
@@ -24,25 +21,18 @@
         return dimOuter.width / dimInner.width;
     };
 
-    f.pixelFactor = function(num)
-    {
-        return Math.trunc(c.pixelFactor * num);
-    };
-
     /**
      * - Alters given element's dimensions.
      * - Returns canvas element.
      */
     f.init = function(p)
     {
-        var retVal = null, eleDim = null;
-
-        c.pixelFactor = f.getPixelFactor(p.dim.inner, p.dim.outer);
-        
-        eleDim = { 
-            width: f.pixelFactor(p.dim.inner.width),
-            height: f.pixelFactor(p.dim.inner.height)
-        };
+        var retVal = null,
+            pixelFactor = f.getPixelFactor(p.dim.inner, p.dim.outer),
+            eleDim = { 
+                width: pixelFactor * p.dim.inner.width,
+                height: pixelFactor * p.dim.inner.height
+            };
         
         retVal = p.createCanvas(
             0, 0, 
@@ -52,6 +42,8 @@
 
         p.ele.style.width = String(eleDim.width) + 'px';
         p.ele.style.height = String(eleDim.height) + 'px';
+
+        retVal.style['background-color'] = p.backgroundColor;
 
         return retVal;
     };
