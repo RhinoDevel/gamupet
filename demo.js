@@ -33,10 +33,10 @@
     f.onLoop = function(/*timestamp*/)
     {
         f.drawPetAt(
-            gamupet.math.getRand(0, c.dim.width - 1),
-            gamupet.math.getRand(0, c.dim.height - 1),
+            f.getRand(0, c.dim.width - 1),
+            f.getRand(0, c.dim.height - 1),
             true, // Graphics mode ON.
-            gamupet.math.getRand(0, c.charCount - 1));
+            f.getRand(0, c.charCount - 1));
         //
         //f.drawAllPetChars();
     };
@@ -47,6 +47,7 @@
         c.charCount = p.charCount;
 
         f.drawPetAt = p.drawPetAt;
+        f.getRand = p.getRand;
     };
 
     o.init = f.init;
