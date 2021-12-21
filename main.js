@@ -32,9 +32,19 @@
         return retVal;
     };
 
+    f.createEle = function()
+    {
+        var retVal = document.createElement('div');
+        
+        retVal.style.order = String(1);
+        retVal.style.position = 'relative';
+
+        return retVal;
+    };
+
     f.onLoad = function()
     {
-        var ele = null,
+        var ele = f.createEle(),
             canvas = null,
             container = null,
             outerDim = {};
@@ -53,10 +63,6 @@
         }
 
         container = f.createContainer(outerDim.width, outerDim.height);
-        
-        ele = document.createElement('div');
-        ele.style.order = String(1);
-        ele.style.position = 'relative';
 
         container.appendChild(ele);
         document.body.appendChild(container);
