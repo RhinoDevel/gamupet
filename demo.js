@@ -30,16 +30,8 @@
         f.drawAllPetCharsWithModeAt(8, false);
     };
 
-    f.onLoop = function(/*timestamp*/)
+    f.update = function()
     {
-        f.drawPetAt(
-            f.getRand(0, c.dim.width - 1),
-            f.getRand(0, c.dim.height - 1),
-            true, // Graphics mode ON.
-            f.getRand(0, c.charCount - 1));
-        //
-        //f.drawAllPetChars();
-
         if(v.keyboard.isPressed(c.key))
         {
             if(!v.isPlaying)
@@ -56,6 +48,17 @@
                 v.isPlaying = false;
             }
         }
+    };
+
+    f.draw = function()
+    {
+        f.drawPetAt(
+            f.getRand(0, c.dim.width - 1),
+            f.getRand(0, c.dim.height - 1),
+            true, // Graphics mode ON.
+            f.getRand(0, c.charCount - 1));
+        //
+        //f.drawAllPetChars();
     };
 
     f.init = function(p)
@@ -75,7 +78,8 @@
     };
 
     o.init = f.init;
-    o.onLoop = f.onLoop;
+    o.update = f.update;
+    o.draw = f.draw;
 
     gamupet.demo = o;
 }());

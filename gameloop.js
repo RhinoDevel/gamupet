@@ -8,54 +8,48 @@
 {
     'use strict';
 
-    var f = {}, c = {}, v = {}, o = {};
+    var f = {}, v = {}, o = {};
 
-    c.freq = 60.0; // Hz (default value). Refresh rate (usually 50Hz or 60Hz).
+    v.lastDrawAt = 0.0;
+    v.step = 0.0; // ms (e.g. ~16.7ms for 60 FPS).
+    v.delta = 0.0; // Holds milliseconds that still need to be processed by
+                   // v.update(). Is not 0.0, if wanted FPS is not dividable
+                   // by .requestAnimationFrame()'s FPS without a remainder. 
 
-    v.last_timestamp = 0.0;
-    v.time = -1.0; // ms
-    v.onLoop = null;
+    v.update = null;
+    v.draw = null;
 
     f.loop = function(timestamp)
     {
-        var elapsed = timestamp - v.last_timestamp; // ms
+        var elapsed = timestamp - v.lastDrawAt; // ms
 
         window.requestAnimationFrame(f.loop);
 
-        if(elapsed < v.time)
+        if(elapsed < v.step)
         {
             return;
         }
-        
-        // Getting exactly 50Hz, 60Hz or other wanted values is not always
-        // possible, depends on elapsed time between two calls of the loop
-        // function which itself depends on hardware and OS:
-        //
-        console.log(
-        'Elapsed: ' + String(elapsed)
-        + ' '
-        + 'FPS: '
-            + String(
-                Math.round(
-                    1.0 / (elapsed / 1000.0))));
-        
-        v.last_timestamp = timestamp;
 
-        v.onLoop(timestamp); // ms
+        v.delta += elapsed;
+
+        do
+        {
+            v.update(); // Called once per step.
+
+            v.delta -= v.step;
+        }while(v.delta >= v.step);
+
+        v.lastDrawAt = timestamp;
+        v.draw();
     };
 
     f.init = function(p)
     {
-        var freq = c.freq;
+        v.update = p.update; // Called once per step.
+        v.draw = p.draw; // Called, when drawing is possible and makes sense.
 
-        v.onLoop = p.onLoop;
-
-        if(typeof p.freq === 'number')
-        {
-            freq = p.freq;
-        }
-        v.time = 1.0 / freq; // s (because frequency is in Hz).
-        v.time = 1000.0 * v.time; // ms
+        v.step = 1.0 / p.freq; // s (because frequency is in Hz).
+        v.step = 1000.0 * v.step; // ms
     };
 
     f.start = function()
