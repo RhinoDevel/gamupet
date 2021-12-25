@@ -72,7 +72,10 @@
         f.getRand = p.getRand;
 
         v.freqplay = p.freqplay;
-        v.keyboard = p.keyboard;
+        v.keyboard = p.keyboard.create(
+            {
+                whitelist: [c.key]
+            });
 
         v.playing = false;
     };

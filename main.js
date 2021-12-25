@@ -105,11 +105,6 @@
 
         gamupet.freqplay.init();
 
-        gamupet.keyboard.init(
-            {
-                whitelist: null
-            });
-
         gamupet.demo.init(
             {
                 dim: {
